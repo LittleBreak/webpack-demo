@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.jsx",
@@ -9,13 +10,26 @@ module.exports = {
     filename: "[name].bundle.js",
   },
   mode: "production",
+  // devServer: {
+  //   contentBase: "./dist",
+  //   hot: true,
+  // },
   module: {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" },
+      {
+        test: /\.(less|css)$/,
+        use: [
+          { loader: "style-loader", options: { injectType: "styleTag" } }, // Inject CSS into the DOM
+          "css-loader", // The css-loader interprets @import and url() like import/require() and will resolve them.
+          "less-loader", // Compiles Less to CSS
+        ],
+      },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    // new MiniCssExtractPlugin(),
   ],
 };
