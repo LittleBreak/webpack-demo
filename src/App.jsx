@@ -4,12 +4,20 @@ import { Button, Modal } from "antd";
 // import moduleName from 'ant';
 import "./app.less";
 import "./common.css";
-import MainPage from "./page/MainPage.jsx";
+// import MainPage from "./page/MainPage.jsx";
+import Home from "./page/Home.jsx";
+import routes from "./config/routes.js";
+import { renderRoutes } from "react-router-config";
+import { BrowserRouter as Router } from "react-router-dom";
+
 class App extends Component {
   render() {
     return (
       <div>
-        <MainPage></MainPage>
+        <Router>
+          {/* kick it all off with the root route */}
+          {renderRoutes(routes)}
+        </Router>
       </div>
     );
   }

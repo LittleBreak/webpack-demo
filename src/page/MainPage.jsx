@@ -1,5 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import loadable from "@loadable/component";
+import { Loading } from "../components";
+
+const LoadableComponent = loadable(() => import("./Page1/Page1.jsx"), {
+  fallback: <Loading />,
+});
 
 export default function App() {
   return (
@@ -26,7 +32,7 @@ export default function App() {
             <About />
           </Route>
           <Route path="/users">
-            <Users />
+            <LoadableComponent />
           </Route>
           <Route path="/">
             <Home />

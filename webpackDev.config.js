@@ -9,7 +9,13 @@ module.exports = {
     // path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
   },
-  mode: "production",
+  // mode: "production",
+  mode: "development",
+  devServer: {
+    contentBase: "./dist",
+    hot: true,
+    host: "0.0.0.0",
+  },
   module: {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "babel-loader" },
